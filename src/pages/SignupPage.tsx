@@ -40,7 +40,7 @@ export default function SignupPage() {
             <form onSubmit={(e) => submit(e)}>
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
                 <br/><br/>
-                <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                 <br/><br/>
                 <button>Submit</button>
             </form>
