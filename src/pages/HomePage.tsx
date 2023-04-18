@@ -2,7 +2,7 @@ import "../index.css";
 
 export default function HomePage() {
     return (
-        <div className="page">
+        <div>
             Welcome to the home page
         </div>
     );
