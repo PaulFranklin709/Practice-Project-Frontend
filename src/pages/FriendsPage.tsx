@@ -34,7 +34,7 @@ export default function FriendsPage() {
                 {
                     usernames.map(
                         (username) => (
-                            <li>{username}</li>
+                            <li className="friends-users">{username}</li>
                         )
                     )
                 }
