@@ -10,9 +10,11 @@ function App() {
     <div>
       <NavigationBar />
       {/* <img src={logo} className="App-logo" alt="logo" /> */}
-      <Suspense fallback={<LoadingPage />}>
-        <Router />
-      </Suspense>
+      <div className="page">
+        <Suspense fallback={<LoadingPage />}>
+          <Router />
+        </Suspense>
+      </div>
     </div>
   );
 }
