@@ -11,6 +11,7 @@ export default function NavigationBar() {
     function signout() {
         window.sessionStorage.removeItem("auth");
         setAuth!(null);
+        navigate("/");
     }
 
     return (
