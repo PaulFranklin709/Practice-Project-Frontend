@@ -1,29 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext, SetAuthContext } from "../context/AuthProvider";
 import "../NavigationBar.css";
 
 export default function NavigationBar() {
     const navigate = useNavigate();
-    const [navAuth, setNavAuth] = useState<boolean>(false);
     const setAuth = useContext(SetAuthContext);
     const auth = useContext(AuthContext);
-
-    useEffect(() => {
-        const data = window.sessionStorage.getItem("auth");
-        console.log(data);
-        if (data === null) {
-            setNavAuth(false);
-        }
-        else {
-            setNavAuth(true);
-        }
-    }, [window.sessionStorage.getItem("auth")]);
 
     function signout() {
         window.sessionStorage.removeItem("auth");
         setAuth!(null);
-        setNavAuth(false);
     }
 
     return (
@@ -31,7 +18,7 @@ export default function NavigationBar() {
             <a className="nav-link" onClick={() => navigate("/")}>Home</a>
 
             {
-                navAuth ?
+                auth !== null ?
                     <span>
                     </span>
                     :
@@ -45,7 +32,7 @@ export default function NavigationBar() {
             <a className="nav-link" onClick={() => navigate("/reimbursements")}>Reimbursements</a>
 
             {
-                navAuth ?
+                auth !== null ?
                     <span>
                         <a className="nav-link" onClick={() => signout()}>Signout</a>
                     </span>
@@ -55,7 +42,7 @@ export default function NavigationBar() {
             }
 
             {
-                navAuth ?
+                auth !== null ?
                     <div className="nav-message">
                         <span>
                             Hello, {auth?.username}
