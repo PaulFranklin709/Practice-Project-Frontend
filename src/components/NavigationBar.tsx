@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext, SetAuthContext } from "../context/AuthProvider";
 import "../NavigationBar.css";
 
@@ -16,18 +16,18 @@ export default function NavigationBar() {
 
     return (
         <div className="nav-background">
-            <a className="nav-link" onClick={() => navigate("/")}>Home</a>
+            <Link className="nav-link" to={"/"}>Home</Link>
 
             {
                 auth !== null ?
                     <span>
-                        <a className="nav-link" onClick={() => navigate("/friends")}>Friends</a>
-                        <a className="nav-link" onClick={() => navigate("/reimbursements")}>Reimbursements</a>
+                        <Link className="nav-link" to={"/friends"}>Friends</Link>
+                        <Link className="nav-link" to={"/reimbursements"}>Reimbursements</Link>
                     </span>
                     :
                     <span>
-                        <a className="nav-link" onClick={() => navigate("/signup")}>Signup</a>
-                        <a className="nav-link" onClick={() => navigate("/login")}>Login</a>
+                        <Link className="nav-link" to={"/signup"}>Signup</Link>
+                        <Link className="nav-link" to={"/login"}>Login</Link>
                     </span>
             }
 
