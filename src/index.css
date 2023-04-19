@@ -16,6 +16,10 @@ code {
   padding: 15px;
 }
 
+.friends-users {
+  cursor: pointer;
+}
+
 .friends-users:hover {
   color:brown;
 }
