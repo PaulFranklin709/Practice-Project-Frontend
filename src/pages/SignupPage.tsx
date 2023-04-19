@@ -10,6 +10,7 @@ export default function SignupPage() {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const setAuth = useContext(SetAuthContext);
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     async function submit(e: FormEvent) {
         e.preventDefault();
@@ -27,9 +28,12 @@ export default function SignupPage() {
             setUsername("");
             setPassword("");
 
+            setErrorMessage("");
+
             navigate("/");
         }).catch((e: any) => {
             // console.log(e);
+            setErrorMessage(e.response.data.message);
         });
     }
 
@@ -44,6 +48,8 @@ export default function SignupPage() {
                 <br/><br/>
                 <button>Submit</button>
             </form>
+            <br/>
+            <div>{errorMessage}</div>
         </div>
     );
 }
