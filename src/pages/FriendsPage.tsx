@@ -6,9 +6,11 @@ import PRACTICE_API from "../utils/ApiConfig";
 export default function FriendsPage() {
     const auth = useContext(AuthContext);
     const [usernames, setUsernames] = useState<string[]>([]);
+    const [friendNames, setFriendNames] = useState<string[]>([]);
 
     useEffect(() => {
         getUsernames();
+        getFriendNames();
     }, [])
 
     async function getUsernames() {
@@ -24,17 +26,55 @@ export default function FriendsPage() {
         });
     }
 
+    async function getFriendNames() {
+        await PRACTICE_API.get("/friendships", {
+            headers: {
+                "authorization": auth?.token
+            }
+        }).then((resp) => {
+            // console.log(resp.data);
+            setFriendNames(resp.data);
+        }).catch((e: any) => {
+            // console.log(e);
+        });
+    }
+
+    async function addFriend(username: string) {
+        // https://axios-http.com/docs/api_intro
+        // https://axios-http.com/docs/req_config
+        await PRACTICE_API.post("/friendships/new", {
+            friendName: username
+        },
+        {
+            headers: {
+                "authorization": auth?.token
+            }
+        }).then((resp) => {
+            // console.log(resp.data);
+            window.location.reload();
+        }).catch((e: any) => {
+            // console.log(e);
+        });
+    }
+
     return (
         <div>
             Friends
             <ul>
+                {
+                    friendNames.map(
+                        (friendName) => (
+                            <li>{friendName}</li>
+                        )
+                    )
+                }
             </ul>
             Users
             <ul>
                 {
                     usernames.map(
                         (username) => (
-                            <li className="friends-users">{username}</li>
+                            <li className="friends-users" onClick={(e) => addFriend(username)}>{username}</li>
                         )
                     )
                 }
