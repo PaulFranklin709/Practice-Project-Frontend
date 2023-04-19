@@ -57,6 +57,21 @@ export default function FriendsPage() {
         });
     }
 
+    async function deleteFriend(friendName: string) {
+        // https://axios-http.com/docs/api_intro
+        // https://axios-http.com/docs/req_config
+        await PRACTICE_API.delete("/friendships/delete/" + friendName, {
+            headers: {
+                "authorization": auth?.token
+            }
+        }).then((resp) => {
+            // console.log(resp.data);
+            window.location.reload();
+        }).catch((e: any) => {
+            // console.log(e);
+        });
+    }
+
     return (
         <div>
             Friends
@@ -64,7 +79,7 @@ export default function FriendsPage() {
                 {
                     friendNames.map(
                         (friendName) => (
-                            <li>{friendName}</li>
+                            <li className="friends-users" onClick={(e) => deleteFriend(friendName)}>{friendName}</li>
                         )
                     )
                 }
