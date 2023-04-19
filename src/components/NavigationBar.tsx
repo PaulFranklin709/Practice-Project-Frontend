@@ -21,6 +21,8 @@ export default function NavigationBar() {
             {
                 auth !== null ?
                     <span>
+                        <a className="nav-link" onClick={() => navigate("/friends")}>Friends</a>
+                        <a className="nav-link" onClick={() => navigate("/reimbursements")}>Reimbursements</a>
                     </span>
                     :
                     <span>
@@ -28,9 +30,6 @@ export default function NavigationBar() {
                         <a className="nav-link" onClick={() => navigate("/login")}>Login</a>
                     </span>
             }
-
-            <a className="nav-link" onClick={() => navigate("/friends")}>Friends</a>
-            <a className="nav-link" onClick={() => navigate("/reimbursements")}>Reimbursements</a>
 
             {
                 auth !== null ?
