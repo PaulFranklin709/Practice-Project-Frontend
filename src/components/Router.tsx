@@ -15,7 +15,7 @@ export default function Router() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/friends' element={<FriendsPage />} />
             <Route path='/reimbursements' element={<ReimbursementsPage />} />
-            <Route path='/reimbursement/:reimb_id' element={<ReimbursementPage />} />
+            <Route path='/reimbursements/:reimb_id' element={<ReimbursementPage />} />
 
             <Route path="/*" element={<ErrorPage />} />
         </Routes>
