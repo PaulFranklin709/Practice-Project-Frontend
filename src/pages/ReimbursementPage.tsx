@@ -22,7 +22,8 @@ export default function ReimbursementPage() {
         }).then((resp) => {
             // console.log(resp.data);
 
-            const data = new Reimbursement(resp.data.reimbId,
+            const data = new Reimbursement(
+                resp.data.reimbId,
                 resp.data.amount,
                 resp.data.submitted,
                 resp.data.resolved,
@@ -30,6 +31,22 @@ export default function ReimbursementPage() {
                 resp.data.author);
 
             setReimbursement(data);
+        }).catch((e: any) => {
+            // console.log(e);
+        });
+    }
+
+    async function resolveReimbursement() {
+        await PRACTICE_API.put("/reimbursements", {
+            reimbId: reimbursement?.reimbId
+        },
+        {
+            headers: {
+                "authorization": auth?.token
+            }
+        }).then((resp) => {
+            // console.log(resp.data);
+            window.location.reload();
         }).catch((e: any) => {
             // console.log(e);
         });
@@ -44,6 +61,8 @@ export default function ReimbursementPage() {
             <div>Resolved: {reimbursement?.resolved ? reimbursement?.resolved : "unresolved"}</div>
             <div>Description: {reimbursement?.description}</div>
             <div>Author: {reimbursement?.author}</div>
+            <br/>
+            <button onClick={(e) => resolveReimbursement()}>Resolve</button>
         </div>
     );
 }
