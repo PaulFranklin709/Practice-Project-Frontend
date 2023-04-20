@@ -62,7 +62,12 @@ export default function ReimbursementPage() {
             <div>Description: {reimbursement?.description}</div>
             <div>Author: {reimbursement?.author}</div>
             <br/>
-            <button onClick={(e) => resolveReimbursement()}>Resolve</button>
+            {
+                reimbursement?.resolved ?
+                    ""
+                    :
+                    <button onClick={(e) => resolveReimbursement()}>Resolve</button>
+            }
         </div>
     );
 }
