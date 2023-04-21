@@ -1,15 +1,14 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SetAuthContext } from "../context/AuthProvider";
 import "../index.css";
 import Auth from "../models/Auth";
 import PRACTICE_API from "../utils/ApiConfig";
 
-export default function SignupPage() {
+export default function SignupPage(props: any) {
     const navigate = useNavigate();
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const setAuth = useContext(SetAuthContext);
+    const setAuth = props.setAuth;
     const [errorMessage, setErrorMessage] = useState<string>("");
 
     async function submit(e: FormEvent) {
