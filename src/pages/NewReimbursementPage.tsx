@@ -1,10 +1,9 @@
 import { FormEvent, Reducer, useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../index.css";
 import PRACTICE_API from "../utils/ApiConfig";
 
 export default function NewReimbursementPage(props: any) {
-    const navigate = useNavigate();
+    const navigate = props.navigate;
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [amount, setAmount] = useReducer<Reducer<number, string | null>>(setAmountReducer, 0);
     const [description, setDescription] = useState<string>("");
