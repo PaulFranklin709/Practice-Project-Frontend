@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import ErrorPage from '../pages/ErrorPage';
 import FriendsPage from '../pages/FriendsPage';
@@ -13,15 +13,16 @@ import { AuthContext, SetAuthContext } from '../context/AuthProvider';
 export default function Router() {
     const auth = useContext(AuthContext);
     const setAuth = useContext(SetAuthContext);
+    const navigate = useNavigate();
 
     return (
         <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/signup' element={<SignupPage setAuth={setAuth} />} />
-            <Route path='/login' element={<LoginPage setAuth={setAuth} />} />
+            <Route path='/signup' element={<SignupPage setAuth={setAuth} navigate={navigate} />} />
+            <Route path='/login' element={<LoginPage setAuth={setAuth} navigate={navigate} />} />
             <Route path='/friends' element={<FriendsPage auth={auth} />} />
             <Route path='/reimbursements' element={<ReimbursementsPage auth={auth} />} />
-            <Route path='/reimbursements/new' element={<NewReimbursementPage auth={auth} />} />
+            <Route path='/reimbursements/new' element={<NewReimbursementPage auth={auth} navigate={navigate} />} />
             <Route path='/reimbursements/:reimb_id' element={<ReimbursementPage auth={auth} />} />
 
             <Route path="/*" element={<ErrorPage />} />
