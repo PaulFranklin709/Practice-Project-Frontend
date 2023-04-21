@@ -1,11 +1,10 @@
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../index.css";
 import Auth from "../models/Auth";
 import PRACTICE_API from "../utils/ApiConfig";
 
 export default function SignupPage(props: any) {
-    const navigate = useNavigate();
+    const navigate = props.navigate;
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const setAuth = props.setAuth;
