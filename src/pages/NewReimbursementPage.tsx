@@ -1,15 +1,14 @@
-import { FormEvent, Reducer, useContext, useReducer, useState } from "react";
+import { FormEvent, Reducer, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthProvider";
 import "../index.css";
 import PRACTICE_API from "../utils/ApiConfig";
 
-export default function NewReimbursementPage() {
+export default function NewReimbursementPage(props: any) {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [amount, setAmount] = useReducer<Reducer<number, string | null>>(setAmountReducer, 0);
     const [description, setDescription] = useState<string>("");
-    const auth = useContext(AuthContext);
+    const auth = props.auth;
 
     async function submit(e: FormEvent): Promise<void> {
         e.preventDefault();
