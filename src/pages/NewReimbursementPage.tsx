@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, Reducer, useContext, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import "../index.css";
@@ -7,7 +7,7 @@ import PRACTICE_API from "../utils/ApiConfig";
 export default function NewReimbursementPage() {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState<string>("");
-    const [amount, setAmount] = useState<number>(0);
+    const [amount, setAmount] = useReducer<Reducer<number, string | null>>(setAmountReducer, 0);
     const [description, setDescription] = useState<string>("");
     const auth = useContext(AuthContext);
 
@@ -24,7 +24,7 @@ export default function NewReimbursementPage() {
         }).then((resp) => {
             // console.log(resp);
 
-            setAmount(0);
+            setAmount(null);
             setDescription("");
 
             setErrorMessage("");
@@ -40,12 +40,16 @@ export default function NewReimbursementPage() {
         return Number(number)
     }
 
+    function setAmountReducer(amount: number, newAmount: string | null) {
+        return newAmount ? parseNumber(newAmount) : 0;
+    }
+
     return (
         <div>
             <div>New Reimbursement</div>
             <br/>   
             <form onSubmit={(e) => submit(e)}>
-                <input type="number" min="0" step="0.01" placeholder="Amount" value={amount} onChange={(e) => setAmount(parseNumber(e.target.value))} required/>
+                <input type="number" min="0" step="0.01" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required/>
                 <br/><br/>
                 <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required/>
                 <br/><br/>
