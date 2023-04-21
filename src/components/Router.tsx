@@ -7,17 +7,22 @@ import ReimbursementPage from '../pages/ReimbursementPage';
 import SignupPage from '../pages/SignupPage';
 import LoginPage from '../pages/LoginPage';
 import NewReimbursementPage from '../pages/NewReimbursementPage';
+import { useContext } from 'react';
+import { AuthContext, SetAuthContext } from '../context/AuthProvider';
 
 export default function Router() {
+    const auth = useContext(AuthContext);
+    const setAuth = useContext(SetAuthContext);
+
     return (
         <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/signup' element={<SignupPage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/friends' element={<FriendsPage />} />
-            <Route path='/reimbursements' element={<ReimbursementsPage />} />
-            <Route path='/reimbursements/new' element={<NewReimbursementPage />} />
-            <Route path='/reimbursements/:reimb_id' element={<ReimbursementPage />} />
+            <Route path='/signup' element={<SignupPage setAuth={setAuth} />} />
+            <Route path='/login' element={<LoginPage setAuth={setAuth} />} />
+            <Route path='/friends' element={<FriendsPage auth={auth} />} />
+            <Route path='/reimbursements' element={<ReimbursementsPage auth={auth} />} />
+            <Route path='/reimbursements/new' element={<NewReimbursementPage auth={auth} />} />
+            <Route path='/reimbursements/:reimb_id' element={<ReimbursementPage auth={auth} />} />
 
             <Route path="/*" element={<ErrorPage />} />
         </Routes>
