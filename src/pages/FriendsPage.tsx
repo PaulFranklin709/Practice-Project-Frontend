@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthProvider";
+import { useEffect, useState } from "react";
 import "../index.css";
 import PRACTICE_API from "../utils/ApiConfig";
 
-export default function FriendsPage() {
-    const auth = useContext(AuthContext);
+export default function FriendsPage(props: any) {
+    const auth = props.auth;
     const [usernames, setUsernames] = useState<string[]>([]);
     const [friendNames, setFriendNames] = useState<string[]>([]);
 
