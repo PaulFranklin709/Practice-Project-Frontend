@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AuthContext } from "../context/AuthProvider";
 import "../index.css";
 import Reimbursement from "../models/Reimbursement";
 import PRACTICE_API from "../utils/ApiConfig";
 
-export default function ReimbursementPage() {
-    const auth = useContext(AuthContext);
+export default function ReimbursementPage(props: any) {
+    const auth = props.auth;
     const [reimbursement, setReimbursement] = useState<Reimbursement | null>(null);
     const { reimb_id } = useParams();
 
